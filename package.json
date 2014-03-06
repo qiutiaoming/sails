@@ -51,7 +51,7 @@
     "connect-mongo": "~0.3.2",
     "grunt-cli": "~0.1.11",
     "ejs": "~0.8.4",
-    "sails-disk": "~0.10.0",
+    "sails-disk": "https://github.com/balderdashy/sails-disk/releases/tag/v0.10.0-rc3",
     "commander": "~2.1.0",
     "grunt": "0.4.2",
     "grunt-contrib-copy": "~0.4.1",
