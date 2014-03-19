@@ -76,22 +76,34 @@ module.exports = {
 
 
 	__GruntAborted__: function ( consoleMsg, stackTrace ) {
-		log.error(
-			'A Grunt error occurred-- please fix it, then restart ' +
-			'Sails to continue watching assets.'
-		);
+
+		var gruntErr =
+			'\n------------------------------------------------------------------------\n' +
+			consoleMsg + '\n' + (stackTrace||'') +
+			'\n------------------------------------------------------------------------';
+		log.error(gruntErr);
+		log.blank();
+		
+		log.error('Looks like a Grunt error occurred--');
+		log.error('Please fix it, then restart Sails to continue watching assets.');
+		log.error('Or if you\'re stuck, check out the troubleshooting tips below.');
+		log.blank();
+
+		log.error('Troubleshooting tips:'.underline);
 		var relativePublicPath = (require('path').resolve(process.cwd(), './.tmp'));
 		var uid = process.getuid && process.getuid() || 'YOUR_COMPUTER_USER_NAME';
-		console.log();
-		log.error(' *-> You might have a malformed LESS or CoffeeScript file...');
+		log.error();
+		log.error(' *-> Is grunt installed locally?  Run `npm install grunt` if you\'re not sure.');
+		log.error();
+		log.error(' *-> You might have a malformed LESS, SASS, CoffeeScript file, etc.');
 		log.error();
 		log.error(' *-> Or maybe you don\'t have permissions to access the `.tmp` directory?');
 		log.error('     e.g., `' + relativePublicPath+'`','?' );
 		log.error();
 		log.error('     If you think this might be the case, try running:');
 		log.error('     sudo chown -R',uid,relativePublicPath);
-		console.log();
-		
+		log.blank();
+
 		return _terminateProcess(1);
 	},
 

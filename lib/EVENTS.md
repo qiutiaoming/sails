@@ -66,6 +66,9 @@ Called after drawing the sailboat.
 Called when all hooks are loaded and the internal router is ready to handle requests.
 i.e. the HTTP hook listens for `ready` before binding its HTTP server.
   
+##### `lower`
+Called when `sails.lower()` is called.  `sails.lower()` is called automatically when the process is halted.
+
 ##### `router:before`
 Called before any of the app's configured static routes have been bound.
 i.e. a hook might listen to this event to bind some middleware.
@@ -169,10 +172,16 @@ Kind of like jQuery's `$(document).ready()`, except `document` is whatever you w
 Useful for checking whether some state has been achieved yet.
 
 ```javascript
-sails.on('hook:yourHookID:someEvent', function yourEventHandler ( /* a, b, c, ..., z */ ) {
+sails.after('hook:yourHookID:someEvent', function yourEventHandler ( /* a, b, c, ..., z */ ) {
 	// your implementation
 });
 ```
+
+<!--
+
+This can be omitted for now-- it really shouldn't be used in userspace.
+May be deprecated, API may change.  Please do not use.
+
 
 #### sails.emit
 
@@ -182,6 +191,7 @@ Emit the specified event with the specified arguments to all listeners.
 sails.emit('hook:yourHookID:someEvent', 'arbitrary', 'number', {of: 'arguments'}, ['allowed']);
 ```
 
+-->
 
 
 ## FAQ
